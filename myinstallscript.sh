@@ -5,23 +5,24 @@
 #SHOULD NOT BE USED!!!
 
 echo "This is my personal install script for Debian/Ubuntu based distros"
-sleep 3
+sleep 1
 echo "Would you like to install following packages ? (Type exactly Yes/No)"
 
 read yn
 
-if ($yn == "Yes"); then
+if [ "$yn" == "Yes" ]; then
 	echo "Installing..."
-	sleep 2
+	sleep 4
 	sudo apt update && sudo apt upgrade -y
 	sudo apt install nala -y
 	sudo nala update && sudo nala upgrade -y
 	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity -y
+	sudo nala update && sudo nala upgrade -y
 	
-elif ($yn == "No"); then
+elif [ "$yn" == "No" ]; then
 	echo "Installation canceled !!"
 	sleep 2
 else
-	echo "Error!"
+	echo "Invalid input !!"
 	sleep 2
 fi
