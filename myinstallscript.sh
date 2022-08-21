@@ -18,7 +18,7 @@ if [ "$yn" == "Yes" ]; then
 #Nala-better front-end for apt
 	sudo apt install nala -y
 	sudo nala update && sudo nala upgrade -y
-#Installign packages using nala
+#Installing packages using nala
 	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity cargo -y
 #Spotify
 	curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
