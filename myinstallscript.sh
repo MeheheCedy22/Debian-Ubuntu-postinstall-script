@@ -5,8 +5,10 @@
 
 echo "This is my personal install script for Debian/Ubuntu based distros"
 sleep 1
-echo "Would you like to install following packages ? (Type exactly Yes/No)"
+echo "Would you like to install following packages ?"
+sleep 2
 cat pckglst.txt
+echo "(Type exactly Yes/No)"
 
 read yn
 
@@ -19,7 +21,7 @@ if [ "$yn" == "Yes" ]; then
 	sudo apt install nala -y
 	sudo nala update && sudo nala upgrade -y
 #Installing packages using nala
-	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity cargo steam-installer -y
+	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity cargo steam-installer hardinfo virtualbox wireshark gnome-tweaks flatpak -y
 #Change directory
 	cd ~/Downloads/
 #Spotify
@@ -47,7 +49,17 @@ if [ "$yn" == "Yes" ]; then
 	sudo make install
 #Change directory
 	cd ~/Downloads/
+#Snap + btop (snap only for btop)
+	sudo nala update
+	sudo nala install snapd
+	sudo snap install core
+	sudo snap install btop
 #
+	echo "Do you want to restart your computer ? (type exactly Yes)"
+	read res
+	if [ "$res" == "Yes" ]; then
+		reboot
+	fi
 elif [ "$yn" == "No" ]; then
 	echo "Installation canceled !!"
 	sleep 2
