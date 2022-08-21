@@ -7,6 +7,7 @@
 echo "This is my personal install script for Debian/Ubuntu based distros"
 sleep 1
 echo "Would you like to install following packages ? (Type exactly Yes/No)"
+cat pckglst.txt
 
 read yn
 
