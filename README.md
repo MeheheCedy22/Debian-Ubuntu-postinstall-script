@@ -5,7 +5,7 @@ NOTE: Script is not complete, usage is not recommended
 My personal post-install script for Debian/Ubuntu based distros
 Feel free to use my script
 
-# Download and run
+# Download and install process
 
 Using git:
 
