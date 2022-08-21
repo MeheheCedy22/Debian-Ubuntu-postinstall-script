@@ -25,3 +25,9 @@ gimp
 vlc
 obs-studio
 audacity
+cargo
+exa #using cargo
+spotify-client #after adding repo
+vs-code #downloaded .deb
+MineCraft #downloaded .deb
+Discord #downloaded .deb
