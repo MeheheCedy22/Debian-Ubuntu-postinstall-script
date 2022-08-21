@@ -1,4 +1,4 @@
-# PostInstall script for Debian/Ubuntu based distros
+# Postinstall script for Debian/Ubuntu based distros
 
 NOTE: Script is not complete, usage is not recommended
 
