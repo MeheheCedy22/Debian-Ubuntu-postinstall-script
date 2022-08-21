@@ -26,8 +26,11 @@ vlc
 obs-studio
 audacity
 cargo
+steam-installer
 exa #using cargo
 spotify-client #after adding repo
 vs-code #downloaded .deb
 MineCraft #downloaded .deb
 Discord #downloaded .deb
+Chromium #flatpak
+colorscript #github DistroTube

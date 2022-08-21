@@ -19,7 +19,9 @@ if [ "$yn" == "Yes" ]; then
 	sudo apt install nala -y
 	sudo nala update && sudo nala upgrade -y
 #Installing packages using nala
-	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity cargo -y
+	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity cargo steam-installer -y
+#Change directory
+	cd ~/Downloads/
 #Spotify
 	curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
 	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
@@ -37,8 +39,15 @@ if [ "$yn" == "Yes" ]; then
 	sudo dpkg -i dis*.deb
 #Exa (better ls)
 	sudo cargo install exa -y
-
-
+#Chromium
+	flatpak install flathub org.chromium.Chromium
+#Colorscript for terminal, must be enabled
+	git clone https://gitlab.com/dwt1/shell-color-scripts.git
+	cd shell-color-scripts
+	sudo make install
+#Change directory
+	cd ~/Downloads/
+#
 elif [ "$yn" == "No" ]; then
 	echo "Installation canceled !!"
 	sleep 2
