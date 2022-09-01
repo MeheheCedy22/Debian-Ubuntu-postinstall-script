@@ -14,6 +14,7 @@ Using git:
 #Download git if you have not already
 sudo apt update && sudo apt install git
 
+cd ~/Downloads
 git clone https://github.com/MeheheCedy22/Debian-Ubuntu-postinstall-script.git
 cd Debian-Ubuntu-postinstall-script
 chmod +x myinstallscript.sh
