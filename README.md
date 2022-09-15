@@ -12,6 +12,7 @@ Using git:
 
 ```
 #Download git if you have not already
+
 sudo apt update && sudo apt install git
 
 cd ~/Downloads
