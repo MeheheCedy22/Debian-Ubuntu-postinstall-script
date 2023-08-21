@@ -90,22 +90,22 @@ sleep 1
 
 	# Using Cargo
 		# Exa
-			cargo install exa -y
+			sudo cargo install exa -y
 			# Already in .bashrc
 			# echo "alias lss=\"exa -alh --color=always --group-directories-first\"" >> ~/.bashrc
 			# source ~/.bashrc
 		# Alacritty
-			cargo install alacritty -y
+			sudo cargo install alacritty -y
 			mkdir -p ~/.config/alacritty
 			cp ~/Downloads/dotfiles/alacritty.yml ~/.config/alacritty/
 		# Dust
-			cargo install du-dust -y
+			sudo cargo install du-dust -y
 
 	# .deb
 		#Spotify
-			curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
+			curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 			echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-			sudo nala update && sudo nala install spotify-client -y
+			sudo nala update && sudo nala install spotify-client
 		#VS CODE
 			wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
 			sudo dpkg -i code*.deb
@@ -114,6 +114,23 @@ sleep 1
 			wget https://launcher.mojang.com/download/Minecraft.deb
 			sudo dpkg -i Mine*.deb
 			
+	# Flatpack
+		flatpak install flathub app.getclipboard.Clipboard -y
+		flatpak install flathub com.discordapp.Discord -y
+		flatpak install flathub com.github.Eloston.UngoogledChromium -y
+		flatpak install flathub com.github.Eloston.UngoogledChromium.Codecs -y
+		flatpak install flathub com.github.d4nj1.tlpui -y
+		flatpak install flathub com.mattjakeman.ExtensionManager -y
+		flatpak install flathub com.sindresorhus.Caprine -y
+		flatpak install flathub io.github.realmazharhussain.GdmSettings -y
+		flatpak install flathub io.missioncenter.MissionCenter -y
+
+	# Snap
+		# Core (to work with snap i guess xd)
+			sudo snap install core -y
+			# sudo snap install core20 -y
+		# btop
+			sudo snap install btop -y
 
 	# Only for Lenovo Legion Y520 laptop
 		echo "Do you have Lenovo Legion Y520 laptop ? (type exactly Yes)"
@@ -128,12 +145,22 @@ sleep 1
 			cd ~/Downloads/
 		fi
 
-	# For Zorin OS only	
+	# For Zorin OS only
+		echo "Zorin OS programs only"
+
 		if [ "$distribution" == "Zorin" ]; then
 			sudo nala install zorin-os-upgrader -y
+		else
+			echo "You are not using Zorin OS, so skipping"	
 		fi
 
-	#Dracula Themes for most of the things
+	# Colorscript for terminal, must be enabled
+		git clone https://gitlab.com/dwt1/shell-color-scripts.git
+		cd shell-color-scripts
+		sudo make install
+		cd ~/Downloads/
+
+	#Dracula Themes for most of the programs
 
 	# Lutris
 		
@@ -143,37 +170,13 @@ sleep 1
 
 	# OpenJDKs
 	
-	#HOTSPOTSHIELD VPN
-
-
-	#Discord
-		wget https://discord.com/api/download?platform=linux&format=deb
-		sudo dpkg -i dis*.deb
-	#Exa (better ls)
-		sudo cargo install exa -y
-	#Chromium
-		flatpak install flathub org.chromium.Chromium
-	#Colorscript for terminal, must be enabled
-		git clone https://gitlab.com/dwt1/shell-color-scripts.git
-		cd shell-color-scripts
-		sudo make install
-	#Change directory
-		cd ~/Downloads/
-	#Snap + btop (snap only for btop)
-		sudo nala update
-		sudo nala install snapd
-		sudo snap install core
-		sudo snap install btop
-
-
-
-
-
+	# HOTSPOTSHIELD VPN
 
 	#
-		echo "Cleaning up..."
+		echo "Cleaning up nala..."
 		sleep 1
 		sudo nala clean
+		echo "For cleaning up ~/Downloads/ directory, please do it manually."
 	#
 
 	echo "Do you want to reboot your computer ? (type exactly Yes)"
