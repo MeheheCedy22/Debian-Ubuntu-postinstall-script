@@ -10,7 +10,7 @@ distribution=$(lsb_release -is)
 echo "----- DEBIAN / UBUNTU POST-INSTALL SCRIPT -----"
 echo "--- For now, only with GNOME DE ---"
 echo "You are using $distribution"
-sleep 1
+sleep 3
 echo "If you wish to adjust the packages/optional programs to be installed, please edit the files:"
 echo "$package_file"
 echo "$optional"
@@ -21,12 +21,12 @@ echo "		You can add your own (distro) packages to the $package_file."
 
 echo "Would you like to start the script and install following packages ?"
 echo "Distro Packages:"
-sleep 1
-cat package_file
-sleep 1
+sleep 3
+cat ./package_file
+sleep 3
 echo "Optional Packages:"
-sleep 1
-cat optional
+sleep 3
+cat ./optional
 echo "(Type exactly Yes/No)"
 
 read choice
@@ -34,7 +34,7 @@ read choice
 if [ "$choice" == "Yes" ]; then
 
 		echo "Updating and upgrading..."
-		sleep 1
+		sleep 3
 
 	# Update and Upgrade
 		sudo apt update && sudo apt upgrade -y
@@ -46,7 +46,7 @@ if [ "$choice" == "Yes" ]; then
 	# Installing packages using nala
 	
 		echo "Reading packages and installing them..."
-		sleep 1
+		sleep 3
 		# Check if the package list file exists
 			if [ -f "$package_file" ]; then
 			# Read each line from the package list file and install the packages
@@ -59,7 +59,7 @@ if [ "$choice" == "Yes" ]; then
 			fi
 
 	echo "Setting up a firewall..."
-	sleep 1
+	sleep 3
 
 	# Firewall setup
 		sudo ufw default deny incoming
@@ -67,7 +67,7 @@ if [ "$choice" == "Yes" ]; then
 		sudo ufw enable
 		
 	echo "Cloneing personal configuration files..."
-	sleep 1
+	sleep 3
 
 	# Change directory and clone personal dotfiles repo and copy .bashrc
 		cd ~/Downloads/
@@ -77,7 +77,7 @@ if [ "$choice" == "Yes" ]; then
 
 #
 echo "Installing packages/programs from other sources..."
-sleep 1
+sleep 3
 #
 
 	# Starship
@@ -105,7 +105,7 @@ sleep 1
 		#Spotify
 			curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 			echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-			sudo nala update && sudo nala install spotify-client
+			sudo nala update && sudo nala install spotify-client -y
 		#VS CODE
 			wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
 			sudo dpkg -i code*.deb
@@ -115,15 +115,15 @@ sleep 1
 			sudo dpkg -i Mine*.deb
 			
 	# Flatpack
-		flatpak install flathub app.getclipboard.Clipboard -y
-		flatpak install flathub com.discordapp.Discord -y
-		flatpak install flathub com.github.Eloston.UngoogledChromium -y
-		flatpak install flathub com.github.Eloston.UngoogledChromium.Codecs -y
-		flatpak install flathub com.github.d4nj1.tlpui -y
-		flatpak install flathub com.mattjakeman.ExtensionManager -y
-		flatpak install flathub com.sindresorhus.Caprine -y
-		flatpak install flathub io.github.realmazharhussain.GdmSettings -y
-		flatpak install flathub io.missioncenter.MissionCenter -y
+		flatpak install flathub app.getclipboard.Clipboard
+		flatpak install flathub com.discordapp.Discord
+		flatpak install flathub com.github.Eloston.UngoogledChromium
+		flatpak install flathub com.github.Eloston.UngoogledChromium.Codecs
+		flatpak install flathub com.github.d4nj1.tlpui
+		flatpak install flathub com.mattjakeman.ExtensionManager
+		flatpak install flathub com.sindresorhus.Caprine
+		flatpak install flathub io.github.realmazharhussain.GdmSettings
+		flatpak install flathub io.missioncenter.MissionCenter
 
 	# Snap
 		# Core (to work with snap i guess xd)
@@ -174,7 +174,7 @@ sleep 1
 
 	#
 		echo "Cleaning up nala..."
-		sleep 1
+		sleep 3
 		sudo nala clean
 		echo "For cleaning up ~/Downloads/ directory, please do it manually."
 	#
