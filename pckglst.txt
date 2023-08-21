@@ -1,42 +1,52 @@
 nala
-python-is-python3
-starship
+audacity
+baobab
+cargo
+cmake
+cowsay
+drawing
+flameshot
+hardinfo
+intel-gpu-tools
+libreoffice
+mc
+net-tools
 nmap
+obs-studio
+piper
+ratbagd
+smartmontools
+steam-installer
+tlp
+tree
+unrar
+virtualbox
+wine
+winetricks
+wireshark
+gedit
+firefox
+openssh-client
+python-is-python3
 neofetch
 mlocate
-htop 
-net-tools
 wireless-tools
+gdb
 git
 gcc
 g++
 curl
 wget
-ssh
 gparted
 nano
-mc
 nvtop
-sensors
-intel-gpu-tools
-tlpui
-flameshot
 gimp
 vlc
-obs-studio
-audacity
-cargo
-steam-installer
-hardinfo
-virtualbox
-wireshark
+htop
 gnome-tweaks
 flatpak
-exa #using cargo
-spotify-client #after adding repo
-vs-code #downloaded .deb
-MineCraft #downloaded .deb
-Discord #downloaded .deb
-Chromium #flatpak
-colorscript #github DistroTube
-btop #snap
+snap
+snapd
+zip
+unrar
+ufw

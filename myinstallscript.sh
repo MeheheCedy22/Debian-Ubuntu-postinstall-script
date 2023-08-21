@@ -1,69 +1,188 @@
 #!/bin/bash
 
-#THIS IS NOT FINISHED VERSION OF SCRIPT
-#SHOULD NOT BE USED!!!
 
-echo "This is my personal install script for Debian/Ubuntu based distros"
+# Script Variables
+package_file="pckglst.txt"
+optional="optional-programs.txt"
+distribution=$(lsb_release -is)
+
+
+echo "----- DEBIAN / UBUNTU POST-INSTALL SCRIPT -----"
+echo "--- For now, only with GNOME DE ---"
+echo "You are using $distribution"
 sleep 1
-echo "Would you like to install following packages ?"
-sleep 2
-cat pckglst.txt
+echo "If you wish to adjust the packages/optional programs to be installed, please edit the files:"
+echo "$package_file"
+echo "$optional"
+echo "Then run this script again."
+echo "NOTE: The files must be located in the same directory as this script."
+echo "		You can add your own (distro) packages to the $package_file."
+
+
+echo "Would you like to start the script and install following packages ?"
+echo "Distro Packages:"
+sleep 1
+cat package_file
+sleep 1
+echo "Optional Packages:"
+sleep 1
+cat optional
 echo "(Type exactly Yes/No)"
 
-read yn
+read choice
 
-if [ "$yn" == "Yes" ]; then
-	echo "Installing..."
-	sleep 4
-#Update and Upgrade
-	sudo apt update && sudo apt upgrade -y
-#Nala-better front-end for apt
-	sudo apt install nala -y
-	sudo nala update && sudo nala upgrade -y
-#Installing packages using nala
-	sudo nala install python-is-python3 starship nmap neofetch mlocate htop net-tools wireless-tools git gcc g++ curl wget ssh gparted nano mc nvtop sensors intel-gpu-tools tlpui flameshot gimp vlc obs-studio audacity cargo steam-installer hardinfo virtualbox wireshark gnome-tweaks flatpak -y
-#Change directory
-	cd ~/Downloads/
-#Spotify
-	curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
-	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-	sudo nala update && sudo nala install spotify-client -y
-#VS CODE
-	wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
-	sudo dpkg -i code*.deb
-#HOTSPOTSHIELD VPN
+if [ "$choice" == "Yes" ]; then
+
+		echo "Updating and upgrading..."
+		sleep 1
+
+	# Update and Upgrade
+		sudo apt update && sudo apt upgrade -y
+
+	# Nala-better front-end for apt
+		sudo apt install nala -y
+		sudo nala update && sudo nala upgrade -y
+
+	# Installing packages using nala
 	
-#Minecraft
-	wget https://launcher.mojang.com/download/Minecraft.deb
-	sudo dpkg -i Mine*.deb
-#Discord
-	wget https://discord.com/api/download?platform=linux&format=deb
-	sudo dpkg -i dis*.deb
-#Exa (better ls)
-	sudo cargo install exa -y
-#Chromium
-	flatpak install flathub org.chromium.Chromium
-#Colorscript for terminal, must be enabled
-	git clone https://gitlab.com/dwt1/shell-color-scripts.git
-	cd shell-color-scripts
-	sudo make install
-#Change directory
-	cd ~/Downloads/
-#Snap + btop (snap only for btop)
-	sudo nala update
-	sudo nala install snapd
-	sudo snap install core
-	sudo snap install btop
+		echo "Reading packages and installing them..."
+		sleep 1
+		# Check if the package list file exists
+			if [ -f "$package_file" ]; then
+			# Read each line from the package list file and install the packages
+				while read -r package; do
+					sudo nala install "$package" -y
+				done < "$package_file"
+			else
+				echo "Package list file not found: $package_file"
+				exit 1
+			fi
+
+	echo "Setting up a firewall..."
+	sleep 1
+
+	# Firewall setup
+		sudo ufw default deny incoming
+		sudo ufw default allow outgoing
+		sudo ufw enable
+		
+	echo "Cloneing personal configuration files..."
+	sleep 1
+
+	# Change directory and clone personal dotfiles repo and copy .bashrc
+		cd ~/Downloads/
+		git clone https://github.com/MeheheCedy22/dotfiles.git
+		cp ~/Downloads/dotfiles/.bashrc ~/
+		source ~/.bashrc
+
 #
-	echo "Do you want to restart your computer ? (type exactly Yes)"
-	read res
-	if [ "$res" == "Yes" ]; then
+echo "Installing packages/programs from other sources..."
+sleep 1
+#
+
+	# Starship
+		curl -sS https://starship.rs/install.sh | sh
+		# Already in .bashrc
+		# echo "eval \"$(starship init bash)\"" >> ~/.bashrc
+		# source ~/.bashrc
+		mkdir -p ~/.config
+		cp ~/Downloads/dotfiles/starship.toml ~/.config/
+
+	# Using Cargo
+		# Exa
+			cargo install exa -y
+			# Already in .bashrc
+			# echo "alias lss=\"exa -alh --color=always --group-directories-first\"" >> ~/.bashrc
+			# source ~/.bashrc
+		# Alacritty
+			cargo install alacritty -y
+			mkdir -p ~/.config/alacritty
+			cp ~/Downloads/dotfiles/alacritty.yml ~/.config/alacritty/
+		# Dust
+			cargo install du-dust -y
+
+	# .deb
+		#Spotify
+			curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add - 
+			echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+			sudo nala update && sudo nala install spotify-client -y
+		#VS CODE
+			wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+			sudo dpkg -i code*.deb
+
+		#Minecraft
+			wget https://launcher.mojang.com/download/Minecraft.deb
+			sudo dpkg -i Mine*.deb
+			
+
+	# Only for Lenovo Legion Y520 laptop
+		echo "Do you have Lenovo Legion Y520 laptop ? (type exactly Yes)"
+		echo "!! WARNING !! DO NOT INSTALL THIS ON OTHER LAPTOPS !!"
+		read laptop
+		
+		if [ "$laptop" == "Yes" ]; then
+			sudo nala install python3-gi python3-gi-cairo gir1.2-gtk-3.0 python3-portio -y
+			git clone https://gitlab.com/OdinTdh/extremecooling4linux.git
+			cd ~/Downloads/extremecooling4linux
+			sudo make install
+			cd ~/Downloads/
+		fi
+
+	# For Zorin OS only	
+		if [ "$distribution" == "Zorin" ]; then
+			sudo nala install zorin-os-upgrader -y
+		fi
+
+	#Dracula Themes for most of the things
+
+	# Lutris
+		
+	# Ripgrep
+
+	# Nvidia drivers
+
+	# OpenJDKs
+	
+	#HOTSPOTSHIELD VPN
+
+
+	#Discord
+		wget https://discord.com/api/download?platform=linux&format=deb
+		sudo dpkg -i dis*.deb
+	#Exa (better ls)
+		sudo cargo install exa -y
+	#Chromium
+		flatpak install flathub org.chromium.Chromium
+	#Colorscript for terminal, must be enabled
+		git clone https://gitlab.com/dwt1/shell-color-scripts.git
+		cd shell-color-scripts
+		sudo make install
+	#Change directory
+		cd ~/Downloads/
+	#Snap + btop (snap only for btop)
+		sudo nala update
+		sudo nala install snapd
+		sudo snap install core
+		sudo snap install btop
+
+
+
+
+
+
+	#
+		echo "Cleaning up..."
+		sleep 1
+		sudo nala clean
+	#
+
+	echo "Do you want to reboot your computer ? (type exactly Yes)"
+	read reboot
+	if [ "$reboot" == "Yes" ]; then
 		reboot
 	fi
-elif [ "$yn" == "No" ]; then
+elif [ "$choice" == "No" ]; then
 	echo "Installation canceled !!"
-	sleep 2
 else
 	echo "Invalid input !!"
-	sleep 2
 fi
