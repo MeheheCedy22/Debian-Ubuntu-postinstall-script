@@ -2,7 +2,7 @@
 
 NOTE: Script is phase of testing and usage is not recommended
 
-'Nala' package is needed for this script to work (Ubuntu 22.04 and higher)
+`Nala` package is needed for this script to work (Ubuntu 22.04 and higher)
 
 My personal post-install script for Debian/Ubuntu based distros
 
