@@ -2,7 +2,9 @@
 
 NOTE: Script is phase of testing and usage is not recommended
 
-`Nala` package is needed for this script to work (Ubuntu 22.04 and higher)
+Supported distributions: Ubuntu 22.04
+This is because the script uses the `nala` package which is missing in older distributions.
+You do not need to install `nala`. The script will install the package.
 
 My personal post-install script for Debian/Ubuntu based distros
 
