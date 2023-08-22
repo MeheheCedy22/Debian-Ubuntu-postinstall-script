@@ -1,19 +1,15 @@
 # Postinstall script for Debian/Ubuntu based distros
 
-NOTE: Script is not complete, usage is not recommended
+NOTE: Script is phase of testing and usage is not recommended
 
-Probably working on Ubuntu LTS 22.04 or later because nala is missing in older versions
+'Nala' package is needed for this script to work (Ubuntu 22.04 and higher)
 
 My personal post-install script for Debian/Ubuntu based distros
 
-Feel free to use my script
-
-# Download and install process
-
-Using git:
+# How to run
 
 ```
-#Download git if you have not already
+# Download git if you have not already
 
 sudo apt update && sudo apt install git
 
