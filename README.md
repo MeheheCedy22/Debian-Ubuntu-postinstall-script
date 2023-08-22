@@ -4,7 +4,7 @@ NOTE: Script is phase of testing and usage is not recommended
 
 Supported distributions: Ubuntu 22.04 (and higher)
 
-This is because the script uses the `nala` package which is missing in older distributions.
+This is because the script uses the `nala` package which is missing in older versions.
 You do not need to install `nala`. The script will install the package.
 
 My personal post-install script for Debian/Ubuntu based distros
