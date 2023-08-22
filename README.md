@@ -2,7 +2,7 @@
 
 NOTE: Script is phase of testing and usage is not recommended
 
-Supported distributions: Ubuntu 22.04
+Supported distributions: Ubuntu 22.04 (and higher)
 
 This is because the script uses the `nala` package which is missing in older distributions.
 You do not need to install `nala`. The script will install the package.
