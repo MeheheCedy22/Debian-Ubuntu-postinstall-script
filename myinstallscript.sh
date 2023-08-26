@@ -92,16 +92,16 @@ sleep 3
 
 	# Using Cargo
 		# Exa
-			sudo cargo install exa -y
+			sudo cargo install exa
 			# Already in .bashrc
 			# echo "alias lss=\"exa -alh --color=always --group-directories-first\"" >> ~/.bashrc
 			# source ~/.bashrc
 		# Alacritty
-			sudo cargo install alacritty -y
+			sudo cargo install alacritty
 			mkdir -p ~/.config/alacritty
 			cp ~/Downloads/dotfiles/alacritty.yml ~/.config/alacritty/
 		# Dust
-			sudo cargo install du-dust -y
+			sudo cargo install du-dust
 
 	# .deb
 		#Spotify
