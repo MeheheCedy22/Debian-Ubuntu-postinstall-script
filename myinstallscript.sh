@@ -16,17 +16,19 @@ echo "$package_file"
 echo "$optional"
 echo "Then run this script again."
 echo "NOTE: The files must be located in the same directory as this script."
-echo "		You can add your own (distro) packages to the $package_file."
+echo "	You can add your own (distro) packages to the $package_file."
 
 
 echo "Would you like to start the script and install following packages ?"
 echo "Distro Packages:"
 sleep 3
-cat ./package_file
+# writing nala to stdout as first package so it dont need to be in the file because installing anyway and preventing to install it twice
+echo "nala"
+cat $package_file
 sleep 3
 echo "Optional Packages:"
 sleep 3
-cat ./optional
+cat $optional
 echo "(Type exactly Yes/No)"
 
 read choice
@@ -66,7 +68,7 @@ if [ "$choice" == "Yes" ]; then
 		sudo ufw default allow outgoing
 		sudo ufw enable
 		
-	echo "Cloneing personal configuration files..."
+	echo "Cloning personal configuration files..."
 	sleep 3
 
 	# Change directory and clone personal dotfiles repo and copy .bashrc
