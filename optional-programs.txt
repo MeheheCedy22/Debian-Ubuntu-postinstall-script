@@ -1,0 +1,19 @@
+starship (shell prompt)
+exa (better ls)
+alacritty (GPU accelerated terminal emulator)
+dust (better du)
+spotify
+vs-code
+minecraft
+clipboard (terminal clipboard manager)
+discord
+ungoogledchromium
+tlpui
+gnome extensions manager
+caprine (3rd party client for messenger)
+GdmSettings (GDM login screen settings)
+missioncenter (clone of windows task manager)
+btop (better htop)
+extremecooling4linux (only for lenovo legion y520 laptops)
+zorin-os-upgrader (only for Zorin OS)
+dt-shell-colorscripts (colorscript -h)
