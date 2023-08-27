@@ -16,7 +16,8 @@ echo "$package_file"
 echo "$optional"
 echo "Then run this script again."
 echo "NOTE: The files must be located in the same directory as this script."
-echo "	You can add your own (distro) packages to the $package_file."
+echo "	You can add your own (distro) packages to the $package_file file."
+echo "	For now, when you delete some packages from the $optional file, it will have no effect."
 
 
 echo "Would you like to start the script and install following packages ?"
@@ -69,6 +70,10 @@ if [ "$choice" == "Yes" ]; then
 		sudo ufw enable
 		
 	echo "Cloning personal configuration files..."
+	echo ".bashrc"
+	echo "starship.toml"
+	echo "alacritty.yml"
+
 	sleep 3
 
 	# Change directory and clone personal dotfiles repo and copy .bashrc
