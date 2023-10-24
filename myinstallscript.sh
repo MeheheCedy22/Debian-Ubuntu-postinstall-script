@@ -32,7 +32,7 @@ sleep 3
 cat $optional
 echo "(Type exactly Yes/No)"
 
-read choice
+read -r choice
 
 if [ "$choice" == "Yes" ]; then
 
@@ -77,10 +77,11 @@ if [ "$choice" == "Yes" ]; then
 	sleep 3
 
 	# Change directory and clone personal dotfiles repo and copy .bashrc
-		cd ~/Downloads/
+		cd ~/Downloads/ || exit 1
 		git clone https://github.com/MeheheCedy22/dotfiles.git
 		cp ~/Downloads/dotfiles/.bashrc ~/
-		source ~/.bashrc
+		# no need to source because not using any alias from .bashrc
+		# source /home/"$USER"/.bashrc
 
 #
 echo "Installing packages/programs from other sources..."
@@ -97,40 +98,40 @@ sleep 3
 
 	# Using Cargo
 		# Exa
-			sudo cargo install exa
+			cargo install exa
 			# Already in .bashrc
 			# echo "alias lss=\"exa -alh --color=always --group-directories-first\"" >> ~/.bashrc
 			# source ~/.bashrc
 		# Alacritty
-			sudo cargo install alacritty
+			cargo install alacritty
 			mkdir -p ~/.config/alacritty
 			cp ~/Downloads/dotfiles/alacritty.yml ~/.config/alacritty/
 		# Dust
-			sudo cargo install du-dust
+			cargo install du-dust
 
 	# .deb
 		#Spotify
 			curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 			echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 			sudo nala update && sudo nala install spotify-client -y
-		#VS CODE
-			wget https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+		#VS CODE , backslash is for escaping the & character
+			wget https://code.visualstudio.com/sha/download?build=stable\&os=linux-deb-x64
 			sudo dpkg -i code*.deb
 
 		#Minecraft
 			wget https://launcher.mojang.com/download/Minecraft.deb
 			sudo dpkg -i Mine*.deb
 			
-	# Flatpack
-		flatpak install flathub app.getclipboard.Clipboard
-		flatpak install flathub com.discordapp.Discord
-		flatpak install flathub com.github.Eloston.UngoogledChromium
-		flatpak install flathub com.github.Eloston.UngoogledChromium.Codecs
-		flatpak install flathub com.github.d4nj1.tlpui
-		flatpak install flathub com.mattjakeman.ExtensionManager
-		flatpak install flathub com.sindresorhus.Caprine
-		flatpak install flathub io.github.realmazharhussain.GdmSettings
-		flatpak install flathub io.missioncenter.MissionCenter
+	# Flatpak
+		flatpak install app.getclipboard.Clipboard
+		flatpak install com.discordapp.Discord
+		flatpak install com.github.Eloston.UngoogledChromium
+		flatpak install com.github.Eloston.UngoogledChromium.Codecs
+		flatpak install com.github.d4nj1.tlpui
+		flatpak install com.mattjakeman.ExtensionManager
+		flatpak install com.sindresorhus.Caprine
+		flatpak install io.github.realmazharhussain.GdmSettings
+		flatpak install io.missioncenter.MissionCenter
 
 	# Snap
 		# Core (to work with snap i guess xd)
@@ -142,14 +143,14 @@ sleep 3
 	# Only for Lenovo Legion Y520 laptop
 		echo "Do you have Lenovo Legion Y520 laptop ? (type exactly Yes)"
 		echo "!! WARNING !! DO NOT INSTALL THIS ON OTHER LAPTOPS !!"
-		read laptop
+		read -r laptop
 		
 		if [ "$laptop" == "Yes" ]; then
 			sudo nala install python3-gi python3-gi-cairo gir1.2-gtk-3.0 python3-portio -y
 			git clone https://gitlab.com/OdinTdh/extremecooling4linux.git
-			cd ~/Downloads/extremecooling4linux
+			cd ~/Downloads/extremecooling4linux || exit 1
 			sudo make install
-			cd ~/Downloads/
+			cd ~/Downloads/ || exit 1
 		fi
 
 	# For Zorin OS only
@@ -163,9 +164,9 @@ sleep 3
 
 	# Colorscript for terminal, must be enabled
 		git clone https://gitlab.com/dwt1/shell-color-scripts.git
-		cd shell-color-scripts
+		cd shell-color-scripts || exit 1
 		sudo make install
-		cd ~/Downloads/
+		cd ~/Downloads/ || exit 1
 
 	#Dracula Themes for most of the programs
 
@@ -185,9 +186,12 @@ sleep 3
 		sudo nala clean
 		echo "For cleaning up ~/Downloads/ directory, please do it manually."
 	#
+	
+	echo "Source your .bashrc manually to apply aliases:"
+	echo "source /home/$USER/.bashrc"
 
 	echo "Do you want to reboot your computer ? (type exactly Yes)"
-	read reboot
+	read -r reboot
 	if [ "$reboot" == "Yes" ]; then
 		reboot
 	fi
@@ -196,3 +200,7 @@ elif [ "$choice" == "No" ]; then
 else
 	echo "Invalid input !!"
 fi
+
+
+
+

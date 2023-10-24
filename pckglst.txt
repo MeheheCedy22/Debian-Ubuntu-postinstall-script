@@ -27,6 +27,7 @@ gedit
 firefox
 openssh-client
 python-is-python3
+pkg-config
 neofetch
 mlocate
 wireless-tools
