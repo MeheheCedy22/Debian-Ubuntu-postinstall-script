@@ -1,10 +1,60 @@
 #!/bin/bash
 
-
 # Script Variables
 package_file="pckglst.txt"
 optional="optional-programs.txt"
 distribution=$(lsb_release -is)
+LOGFILE="myinstallscript.log"
+
+debug=false
+
+automatic=false
+force=false
+
+# Text formatting variables, with echo use -e flag to interpret them (backslashes)
+BOLD="\e[1m"
+RESET="\e[0m"
+
+help() {
+    echo "$(basename "$0") (C) Marek Čederle"
+    echo ""
+    echo "Usage: $(basename "$0") [-h] [-y] [-f]"
+    echo "-h - This help message."
+    echo "-y - Automatic install without prompts. Says yes every package."
+    echo "-f - Force install. It will skip the prompts for speacial configuration for some packages. For example says yes to wireshark configuration if the non-super users can capture packets."
+}
+
+# Function to log and print messages
+log_and_print() {
+    echo -e "$1" | tee -a "$LOGFILE"
+}
+
+
+# Parse command-line options
+while getopts ":hyf" opt; do
+    
+    if [ "$debug" = true ]; then
+        echo "Debug: \$opt \$OPTARG"
+        echo "Debug: $opt $OPTARG"
+    fi
+    
+    case $opt in
+        h)
+            help
+            exit 0
+        ;;
+        y)
+			automatic=true
+        ;;
+        f)
+			force=true
+        ;;
+        \?)
+            echo "Error: '-$OPTARG': is not valid argument" >&2
+            exit 1
+        ;;
+    esac
+done
 
 
 echo "----- DEBIAN / UBUNTU POST-INSTALL SCRIPT -----"
