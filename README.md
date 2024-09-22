@@ -1,3 +1,7 @@
+# Note: Do NOT run!
+# Might get back to rewriting this script in the future (eventually)
+
+
 # Postinstall script for Debian/Ubuntu based distros
 
 NOTE: Script is in phase of testing and usage is not recommended
